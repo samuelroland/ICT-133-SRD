@@ -19,8 +19,8 @@ date_default_timezone_set("Europe/Zurich");
 //début de la liste ordonée:
 
 //On choisit quel temps on veut prendre:
-$timestamp = time();  //temps actuel avec la fonction time()
-
+//$timestamp = time();  //temps actuel avec la fonction time()
+$timestamp = strtotime("27.10.2019 05:15:17");
 echo "<ol>";
 echo "<li>".date('l d F Y', $timestamp)."</li>";
 echo "<li>".date('M jS Y', $timestamp)."</li>";
