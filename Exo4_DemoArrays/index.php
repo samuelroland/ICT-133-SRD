@@ -20,10 +20,14 @@ $mostUsedBrowser = $browsers[2];
 
 // Replaces 'Edge' with 'Opera'
 //TODO - il vous faut coder ici
+$browsers[1]="Opera";
 // Loop through an Indexed Array
 $arrLength = count($browsers);      // Assign the number of Elements of the Array '$browsers'
 $browsersList = "";
 //TODO - il vous faut coder ici
+for ($i=0;$i<$arrLength;$i++){
+    $browsersList =$browsersList.$browsers[$i]." - ";
+}
 
 //</editor-fold>
 
@@ -38,14 +42,15 @@ $contactInfo= array(
 
 // assign the city ("Yverdon") to $Home
 //TODO - il vous faut coder ici
-
+$Home = $contactInfo["City"];
 // Replaces 'John Doe' with 'Jane Doe'
 //TODO - il vous faut coder ici
-
+$contactInfo["name"]= "Jane Doe";
 // Loop through an Associated Array
 $completedContact="";
 foreach ($contactInfo as $element){
     //TODO - il vous faut coder ici
+    $completedContact = $completedContact.$element." - ";
 }
 //</editor-fold>
 
@@ -59,10 +64,10 @@ $people= array(
 
 // assign "Joe" to $person
 //TODO - il vous faut coder ici
-
+$person = $people[2][0];
 // Replaces 'Bart' with 'Lisa'
 //TODO - il vous faut coder ici
-
+$people[1][2]= "Lisa";
 
 // Loop through an Two-dimensional Array
 $rowLength = count($people);        //Assign the number of rows of the array "People"
@@ -71,3 +76,8 @@ $personList="";                     // Initialise the string $PersonList
 
 //TODO - il vous faut coder ici
 //</editor-fold>
+for ($j = 0; $j < $rowLength; $j++) {
+    for ($k = 0; $k < $colLength; $k++) {
+        $personList = $personList.$people[$j][$k]." - ";
+    }
+}
