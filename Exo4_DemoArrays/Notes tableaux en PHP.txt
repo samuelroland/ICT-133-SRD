@@ -1,0 +1,53 @@
+Notes sur les tableaux en PHP:
+
+Un tableau se crée avec la fonction array();
+
+$contacts = array("John", "David", "Romain", "Jules");
+
+
+3 types de tableaux:
+
+Les tableaux indexés (comme en C)
+Lie un entier (index) avec une valeur
+$cars = array("Volvo", "BMW", "Toyota");
+
+0 lié à Volvo
+1 lié à BMW
+...
+
+Pour utiliser tous les éléments il suffit de faire une boucle.
+On écrit ou lit la valeur avec le numéro d'index entre crochet.
+ $cars[index]
+
+
+Les tableaux Associés
+Lie un clé avec une valeur
+
+$contactInfo = array(
+    'name'      => 'John Doe',
+    'address'   => 'Rue de Lausanne 25',
+    'NPA'       => 1400,
+    'City'      => 'Yverdon'
+);
+
+On ne peut pas faire de boucles FOR puisque ce n'est plus des entiers, alors on fait une boucle foreach:
+
+foreach ($contactInfo as $element){
+    echo $element." ";	//$element prend chaque valeur du tableau.
+}
+
+Si on oublie de mettre un clé, un index est automatiquement mis.
+
+Ou alors pour prendre une case dont on connait la clé, on met la clé à la place de l'index.
+$contactInfo["name"] = "John Assange";
+
+
+Les tableaux multidimensionnels:
+
+$people = array(
+    array('Perceval','Arthur','Lancelot','Leodagan'),
+    array('Marge','Homer','Bart','Maggie'),
+    array('Joe','Jack','William','Averell'),
+);
+
+En créant des tableaux avec array() dans une case, on obtient un tableau 1D dans un case donc deux dimensions finalement.
