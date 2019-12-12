@@ -19,10 +19,12 @@
 //If month and year are null take this value by default:
 $month = 8;
 $year = 2019;
-//TODO:
-//Comment faire que ca ne plante pas si il n'y a pas de querystring ?
-$month = $_GET['month'];
-$year = $_GET['year'];
+
+if (isset($_GET['month']) && isset($_GET['year'])) {
+    $month = $_GET['month'];
+    $year = $_GET['year'];
+}
+
 $now = time();  //take the date et time of now
 $year += 0;
 $month += 0;
@@ -51,8 +53,9 @@ if ($month == 1) {
     $yeartomonth = $year;
 }
 
-$firstdaystartat = date("w", mktime(1, 1, 1, $month, 0, $year));//day of the week that is the 1 of the month
+$firstdaystartat = date("w", strtotime("2019-07-0"));//day of the week that is the 1 of the month
 $firstdaystartat += 0;
+echo $firstdaystartat;
 
 //Trouver le dernier jour du mois actuel:
 $lastdaypossiblelastmonth = 31; //par défaut c'est 31 et si c'est pas le cas, il sera réduit en dessous.
@@ -86,25 +89,32 @@ for ($i = 1; $i <= 7; $i++) {
     }
 }
 echo '</ul>';
-
+$nbdayslastmonth = $firstdaystartat; //nombre de jours affichés du mois d'avant.
 
 echo '<ul class="days">';   //début des jours du mois
-for ($i = 1; $i <= $lastdaypossiblethismonth; $i++) {
-    if ($firstdaystartat != 0) {    //Si le premier jour du mois est autre que lundi
-        while ($firstdaystartat != 0) {
-            $daylastmonth = $lastdaypossiblelastmonth - $firstdaystartat + 1;
-            $firstdaystartat -= 1;
-            echo "<li class='lastmonth'>$daylastmonth</li>";
-        }
+
+//Afficher les numéros des mois précédents si il y en a:
+if ($firstdaystartat != 0) {    //Si le premier jour du mois est autre que lundi
+    while ($firstdaystartat != 0) {
+        $daylastmonth = $lastdaypossiblelastmonth - $firstdaystartat + 1;
+        $firstdaystartat -= 1;
+        echo "<li class='lastmonth'>$daylastmonth</li>";
     }
+}
+
+//Afficher les jours du mois courant:
+for ($i = 1; $i <= $lastdaypossiblethismonth; $i++) {
+
 
     if ($i == date("j", $now) && $month == date("F", $now) && $year == date("Y", $now)) {
         echo "<li class='thismonth'><span class='active'>$i</span></li>";
     } else {
         echo "<li class='thismonth'>$i</li>";
     }
-
 }
+
+//Afficher les jours des mois d'après si il y en a:
+
 
 echo '</ul>';
 //Boutons mois suivants et précedents:
