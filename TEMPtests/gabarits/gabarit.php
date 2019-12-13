@@ -27,13 +27,12 @@
  *  Creation date: 12.12.2019
  */
 
-echo "<h1>$title</h1>";
+echo "<h1>$title</h1>"; //
 ?>
 <header>
     <img src="logo/logo.png" alt="logo">
     <nav>CPNV </nav>
 </header>
-<h2>Eleves de la classe</h2>
 <ul>
     <?php
     for ($i=0;$i<count($students); $i++){

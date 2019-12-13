@@ -53,7 +53,7 @@ if ($month == 1) {
     $yeartomonth = $year;
 }
 
-$firstdaystartat = date("w", strtotime("2019-07-0"));//day of the week that is the 1 of the month
+$firstdaystartat = date("w", strtotime("$year-$month-0"));//day of the week that is the 1 of the month
 $firstdaystartat += 0;
 echo $firstdaystartat;
 
