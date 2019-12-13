@@ -53,9 +53,10 @@ if ($month == 1) {
     $yeartomonth = $year;
 }
 
+echo date("Y-M-D", strtotime("$year-$month-0"));
 $firstdaystartat = date("w", strtotime("$year-$month-0"));//day of the week that is the 1 of the month
 $firstdaystartat += 0;
-echo $firstdaystartat;
+
 
 //Trouver le dernier jour du mois actuel:
 $lastdaypossiblelastmonth = 31; //par défaut c'est 31 et si c'est pas le cas, il sera réduit en dessous.
