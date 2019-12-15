@@ -1,0 +1,7 @@
+si dossier contient un index.php donc cest un exo et peut souvrir seul. alors pas dimage de dossier et lien direct sur index.php
+
+si dossier contient pas de index.php
+
+-	si contient d'autres php alors afficher une sous liste des php avec les liens directs. pas de lien sur le dossier car inutile.
+
+-	si contient pas d'autres php, alors c'est un dossier d'exercices donc image dossier + lien querystring pour ouvrir l'intérieur. 
