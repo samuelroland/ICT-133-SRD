@@ -63,7 +63,7 @@ body {font-family: Verdana, sans-serif;}
     margin-bottom: 5px;
     font-size:12px;
     color: #777;
-    font-weight: bold;
+
 }
 
 /* Highlight the "current" day */
@@ -88,11 +88,12 @@ body {font-family: Verdana, sans-serif;}
 }
 
 .othermonth{
-    background-color: pink;
+    background-color: #dddddd;
 }
 
 .thismonth{
-background-color: #14abbc;
+background-color: #61bcae;
+    font-weight: bold;
 }
 
 .button:hover{
