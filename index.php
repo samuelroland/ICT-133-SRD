@@ -33,6 +33,7 @@
             color: white;
             padding: 7px;
             list-style: none;
+            padding-left: 5px;
         }
 
         img {
@@ -40,22 +41,35 @@
             width: 50px;
             background-color: white;
         }
+        strong  {
+            color: red;
+        }
+
     </style>
 </head>
 <body>
 <h1>Accueil Exos ICT-133</h1>
-<h4>Exercices automatiquement trouvés à la racine du serveur : </h4>
+
 
 <?php
 //uniquement si le script php se trouve à la racine du site.
 //$filescollection = scandir($_SERVER['DOCUMENT_ROOT']);  //collection des éléments du dossier qui contient ce fichier.
 $filetoexclude = array(".", "..", "internindex.php", ".git", ".gitignore", ".idea", "img-accueil", "index.php", "index.html", "images", "img", "js", "javascript", "style", "css", "html", "pages", "doc", "documentation", "readme.md", "README.md");  //fichier ou dossiers potentiels à exclure. tout le reste sont des dossiers des exercices...
-$pathofthescript = $_SERVER['SCRIPT_FILENAME'];
-$dossieractuel = substr($pathofthescript, 0, strripos($pathofthescript, "\\") + 1);
-$filescollection = scandir($dossieractuel);
+//$pathofthescript = $_SERVER['SCRIPT_FILENAME'];
+//$dossieractuel = substr($pathofthescript, 0, strripos($pathofthescript, "\\") + 1);
 
 //TODO: prendre la valeur de path dans la querystring pour afficher un dossier d'exercices et appliquer a $dossieractuel
+if (isset($_GET['path'])){
+    $path= $_GET['path'];
+    $path = str_replace(" ", "", $path);    //enleve les espaces au path
+    //Afficher qu'on se trouve dans un dossier et pas à la racine du site:
+    echo "<h4><strong>Position: </strong>/$path</h4>";
 
+}else{
+    echo "<h4><strong>Position: </strong>Racine du site</h4>";
+}
+$dossieractuel = $path;
+$filescollection = scandir($dossieractuel);
 $pathfolderlogo = "img-accueil\\folderlogo.png";
 function checkisafolder($folder, $filetoexclude)    //check si l'élément est un dossier, en regardant la liste des fichiers exclus.
 {
@@ -78,28 +92,21 @@ function format($name)
     return $name;
 }
 
-function integratecontent($folderinner, $filetoexclude)
+function integratecontent($folderinner, $filetoexclude) //intégre les fichiers php du dossier dans une sous-liste
 {
-    $content = "<ul>";
-    $pathofthescript = $_SERVER['SCRIPT_FILENAME'];
-    $dossieractuel = substr($pathofthescript, 0, strripos($pathofthescript, "\\") + 1);
-
-    foreach (scandir($dossieractuel . $folderinner) as $file) {   //Pour tous les fichiers trouvés à la racine.
+    $dossierinrun= $GLOBALS['dossieractuel'];
+    $content="";
+    foreach (scandir($dossierinrun. $folderinner) as $file) {   //Pour tous les fichiers trouvés à la racine.
         if (checkisafolder($file, $filetoexclude) == true && (stripos($file, ".php") || stripos($file, ".html"))) {
-            $content .= "<li><a href='$folderinner$file'>" . " -- " . $file . "</a></li>";
+            $content .= "<li ><a href='$dossierinrun$folderinner$file' >" . "-- " . $file . "</a></li>";
         }
     }
-    $content .= "</ul>";
     return $content;
 }
 
 function containsphpfiles($folderinner, $filetoexclude)
 {
-
-    $pathofthescript = $_SERVER['SCRIPT_FILENAME'];
-    $dossieractuel = substr($pathofthescript, 0, strripos($pathofthescript, "\\") + 1);
-
-    foreach (scandir($dossieractuel . $folderinner) as $file) {   //Pour tous les fichiers trouvés à la racine.
+    foreach (scandir($GLOBALS['dossieractuel'] . $folderinner) as $file) {   //Pour tous les fichiers trouvés à la racine.
         if (stripos($file, ".php") > -1 && $file != "index.php") {  //si le fichier est un fichier php mais pas un index.
             return true;
         }
@@ -116,9 +123,9 @@ foreach ($filescollection as $file) {   //Pour tous les fichiers trouvés à la 
         if (file_exists($dossieractuel . $file . "\\index.php") == 1) { //si contient un index.php
             echo "<li><a href=\"" . $file . "/index.php\">" . "Exo: ".$formatedname . "</a></li>";  //lien direct sur index.php
         } else if (containsphpfiles("\\$file\\", $filetoexclude) == true) { //si contient d'autres fichiers php
-            echo "<li><br>" . $formatedname . integratecontent("\\$file\\", $filetoexclude) . "</li>";
-        } else {
-            echo "<li><a href=\"" . $file . "/index.php\"><img src='$pathfolderlogo'>  " . $formatedname . "</a></li>";
+            echo "<br><li>"."Exo: ". $formatedname ."<ul>". integratecontent("\\$file\\", $filetoexclude) . "</ul></li>";
+        } else {    //si ne contient pas de php alors c'est un dossier contenant des exercices
+            echo "<li><a href='?path=$path$file'><img src='$pathfolderlogo'>Dossier: $formatedname</a></li>";
         }
 
         //le rajouter à la liste de liens vers les exercices:
