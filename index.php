@@ -67,13 +67,15 @@ if (isset($_GET['path'])) {
     $path = str_replace(" ", "", $path);    //enleve les espaces au path
     //Afficher qu'on se trouve dans un dossier et pas à la racine du site:
     $path = str_replace($dossierduscript, "", $path);
-    echo "<h4><strong>Position: </strong>/$path</h4>";
+    echo "<h4><strong>Position: </strong>$path</h4>";
 
 } else {
     $path = str_replace($dossierduscript, "", $path);
     echo "<h4><strong>Position: </strong>Racine du site</h4>";
 }
-
+if (substr($path, 1, 1) == "/" || substr($path, 1, 1) == "\\") {
+    $path = substr($path, 1);
+}
 $dossieractuel = $path;
 $filescollection = scandir($dossierduscript);
 if (strlen($path) != 0) {
@@ -84,7 +86,7 @@ $pathfolderlogo = "img-accueil\\folderlogo.png";
 function checkisafolder($folder, $filetoexclude)    //check si l'élément est un dossier, en regardant la liste des fichiers exclus.
 {
     for ($i = 0; $i < count($filetoexclude); $i++) {
-        if ($folder == $filetoexclude[$i]) {
+        if ($folder == $filetoexclude[$i] || strpos($folder, ".txt") == true) {
             return false;   //retourne que folder n'est pas un dossier d'exercices.
         }
     }
@@ -99,26 +101,26 @@ function format($name)
     $name = str_replace("_", " ", $name);
     $name = str_replace(".", " ", $name);
 
+    //cas spécial des dossiers:
+    if (strtolower($name) == "jfl") {
+        $name .= " (Just For Learning)";
+    }
     return $name;
 }
 
-function integratecontent($folderinner, $filetoexclude) //intégre les fichiers php du dossier dans une sous-liste
+function integratecontent($subfolder, $filetoexclude) //intégre les fichiers php du dossier dans une sous-liste
 {
-    $dossierinrun = $GLOBALS['dossieractuel'];
     $content = "";
-    foreach (scandir($dossierinrun . $folderinner) as $file) {   //Pour tous les fichiers trouvés à la racine.
-        if (checkisafolder($file, $filetoexclude) == true && (stripos($file, ".php") || stripos($file, ".html"))) {
-            $content .= "<li ><a href='$dossierinrun$folderinner$file' >" . "-- " . $file . "</a></li>";
+    foreach (scandir($subfolder) as $phpfile) {   //Pour tous les fichiers trouvés à la racine.
+        if (checkisafolder($phpfile, $filetoexclude) == true && (stripos($phpfile, ".php") || stripos($phpfile, ".html"))) {
+            $content .= "<li ><a href='$subfolder$phpfile' >" . "-- " . $phpfile . "</a></li>";
         }
     }
     return $content;
 }
 
-function containsphpfiles($folderinner, $filetoexclude)
+function containsphpfiles($subfolder, $filetoexclude)
 {
-    $subfolder = $GLOBALS['dossieractuel'] . $folderinner;
-    $subfolder = substr($subfolder, 1);
-
     foreach (scandir($subfolder) as $file) {   //Pour tous les fichiers trouvés à la racine.
         if (stripos($file, ".php") > -1 && $file != "index.php") {  //si le fichier est un fichier php mais pas un index.
             return true;
@@ -131,20 +133,24 @@ function containsphpfiles($folderinner, $filetoexclude)
 
 //Liste des dossiers trouvés:
 foreach ($filescollection as $file) {   //Pour tous les fichiers trouvés à la racine.
+
     if (checkisafolder($file, $filetoexclude) == true) {//Si l'élément est un dossier d'exercices
+        //générer le path du sous dossier:
+        $subfolder = "";
+        $subfolder = $path . "/" . $file . "/";
+        if (substr($subfolder, 0, 1) == "/" || substr($subfolder, 1, 1) == "\\") {
+            $subfolder = substr($subfolder, 1);
+        }
+
         $formatedname = format($file);   //créer son nom formaté pour le nom de l'exercice à partir du nom du dossier sans les séparateurs.
         //TODO: $subfolderpath pour rajouter fichier et envoyer dans les fonctions.
         //Ajouter une image devant si contient d'autres exercices (donc si contient un index.php)
-        if (file_exists($subfolder. "index.php") == 1) { //si contient un index.php
-            echo "<li><a href=\"".$path ."/". $file . "/index.php\">" . "Exo: " . $formatedname . "</a></li>";  //lien direct sur index.php
-        } else if (containsphpfiles("/$file/", $filetoexclude) == true) { //si contient d'autres fichiers php
-            echo "<br><li>" . "Exo: " . $formatedname . "<ul>" . integratecontent("//$file/", $filetoexclude) . "</ul></li>";
+        if (file_exists($subfolder . "index.php") == 1) { //si contient un index.php
+            echo "<li><a href=\"$subfolder" . "index.php\">" . "Exo: " . $formatedname . "</a></li>";  //lien direct sur index.php
+        } else if (containsphpfiles($subfolder, $filetoexclude) == true) { //si contient d'autres fichiers php
+            echo "<br><li>" . "Exo: " . $formatedname . "<ul>" . integratecontent($subfolder, $filetoexclude) . "</ul></li>";
         } else {    //si ne contient pas de php alors c'est un dossier contenant des exercices
-            if (strlen($path)==0){
-                echo "<li><a href='?path=$path$file'><img src='$pathfolderlogo'>Dossier: $formatedname</a></li>";
-            }else{
-                echo "<li><a href='?path=$path/$file'><img src='$pathfolderlogo'>Dossier: $formatedname</a></li>";
-            }
+            echo "<li><a href='?path=$subfolder'><img src='$pathfolderlogo'>Dossier: $formatedname</a></li>";
         }
 
         //le rajouter à la liste de liens vers les exercices:
