@@ -11,4 +11,5 @@ ob_start();
     <a href='?action=concerts'><img src="images/concerts.jpg" alt="movies" height="250px"></a>
 <?php
 $content = ob_get_clean();
+require_once "gabarit.php";
 ?>

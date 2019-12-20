@@ -25,22 +25,30 @@ function showConcerts()
     }
 
     //Afficher les données
-    require_once("view/concerts.php");
+    require_once "view/concerts.php";
 }
 
 function showMovies()
 {
-
-    $audio="Standard";
     require_once "modele/movies.php";
 
+    $audio = $_POST['audio'];
+    $heuremin = $_POST['heuremin'];
+    var_dump($audio);
+    var_dump($heuremin);
+
     foreach ($listofmovies as $i => $movie) {
-        if ($movie['title'] != "Last Christmas") {
-            //unset($listofmovies[$i]); //on supprime le concert du tableau et pas la copie faite par foreach !
-            $listofmovies[$i] = "salut";
+        if ($movie['audio'] != $audio || $movie['showtime']!=$heuremin) {
+            unset($listofmovies[$i]); //on supprime le concert du tableau et pas la copie faite par foreach !
+
         }
     }
     require_once "view/movies.php";
+}
+
+function showmoviesfilter(){
+    require_once "modele/movies.php";
+    require_once "view/moviesfilter.php";
 }
 
 ?>
