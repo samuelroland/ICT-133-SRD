@@ -1,4 +1,5 @@
 <?php
+
 $title = "Accueil";
 $content = "Contenu de la page $title";
 
@@ -8,6 +9,12 @@ if (isset($_GET['action'])){
     $action = "home";
 }
 
+if (isset($_GET['audio'])){
+    $audio= $_GET['audio'];
+}else{
+    $audio = "Standard";
+}
+require_once "controller/controller.php";
 
 switch ($action){
     case "movies":
@@ -17,7 +24,7 @@ switch ($action){
     case "concerts":
         $title = "Concerts";
         $content = "Listes des concerts";
-        require_once "view/concerts.php";
+        showConcerts();
         break;
     default:
         $title = "Home";
