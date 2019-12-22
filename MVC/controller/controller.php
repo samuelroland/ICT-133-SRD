@@ -34,11 +34,18 @@ function showMovies()
 
     $audio = $_POST['audio'];
     $heuremin = $_POST['heuremin'];
-    var_dump($audio);
-    var_dump($heuremin);
+//Changer la valeur de $audio pour correspondre au tableau.
+    switch ($audio) {
+        case "std":
+            $audio = "Standard";
+            break;
+        case "dblFrench":
+            $audio = "Doublé en français";
+            break;
+    }
 
     foreach ($listofmovies as $i => $movie) {
-        if ($movie['audio'] != $audio || $movie['showtime']!=$heuremin) {
+        if ($movie['audio'] != $audio || $movie['showtime'] < $heuremin) {
             unset($listofmovies[$i]); //on supprime le concert du tableau et pas la copie faite par foreach !
 
         }
@@ -46,7 +53,8 @@ function showMovies()
     require_once "view/movies.php";
 }
 
-function showmoviesfilter(){
+function showmoviesfilter()
+{
     require_once "modele/movies.php";
     require_once "view/moviesfilter.php";
 }

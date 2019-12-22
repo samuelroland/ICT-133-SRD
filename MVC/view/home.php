@@ -7,7 +7,7 @@
  */
 ob_start();
 ?>
-    <a href='?action=movies'><img src="images/movies.jpg" alt="movies" height="250px"></a>
+    <a href='?action=selectmovies'><img src="images/movies.jpg" alt="movies" height="250px"></a>
     <a href='?action=concerts'><img src="images/concerts.jpg" alt="movies" height="250px"></a>
 <?php
 $content = ob_get_clean();

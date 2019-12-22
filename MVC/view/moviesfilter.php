@@ -9,9 +9,13 @@ ob_start();
 ?>
 <h1>Choix de la liste des films</h1>
     <form action="/index.php?action=movies" method="POST">
-        <label for="">Choix type audio</label><input class="input-group" type="text" name="audio"><br>
+        <label for="">Choix type audio</label>
+        <select name="audio" id="salut">
+            <option value="dblFrench">Doublé en français</option>
+            <option value="std">Standard</option>
+        </select><br>
         <label for="">Choix heure minimum</label>
-        <input type="text" class="input-group" name="heuremin"><br>
+        <input type="time" class="input-group" name="heuremin"><br>
         <input type="submit" class="btn-dark">
     </form>
     <br>
