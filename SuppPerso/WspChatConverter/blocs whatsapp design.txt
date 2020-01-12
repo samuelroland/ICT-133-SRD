@@ -1,0 +1,164 @@
+message standard
+
+IN:
+
+
+<div class="FTBzM _4jEk2 message-in"><span></span>
+<div class="_1zGQT _2ugFP tail"><span class="tail-container"></span><span
+        class="tail-container highlight"></span>
+    <div class="_2Wx_5 _3LG3B">
+        <div class="-N6Gq">
+            <div class="copyable-text" data-pre-plain-text="[21:38, 17.12.2019] Altin Zili: ">
+            <div class="_12pGw" dir="ltr"><span dir="ltr" class="_F7Vk selectable-text invisible-space copyable-text"><span>Ok merci</span></span><span class="EopGb"></span></div></div><div class="_1RNhZ">
+                    <div class="_3MYI2"><span class="_3fnHB" dir="auto">21:38</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span></span></div>
+</div>
+
+
+OUT:
+
+
+
+<div class="FTBzM message-out"><span></span>
+    <div class="_1zGQT _2ugFP tail"><span class="tail-container"></span><span
+        class="tail-container highlight"></span>
+        <div class="_2Wx_5 _3LG3B">
+            <div class="-N6Gq">
+                <div class="copyable-text"
+                     data-pre-plain-text="[21:38, 17.12.2019] SLynux: ">
+                    <div class="_12pGw" dir="ltr"><span dir="ltr"
+                                                        class="_F7Vk selectable-text invisible-space copyable-text"><span>Entre 10 et 10.30 normalement.</span></span><span
+                            class="EopGb _3HIqo"></span></div>
+                </div>
+                <div class="_1RNhZ">
+                    <div class="_3MYI2" role="button"><span class="_3fnHB"
+                                                            dir="auto">21:38</span>
+                        <div class="_370iZ"><span data-icon="msg-dblcheck-ack"
+                                                  class=""><svg id="Layer_1"
+                                                                xmlns="http://www.w3.org 2000/svg"
+                                                                viewBox="0 0 16 15"
+                                                                width="16"
+                                                                height="15"><path
+                                fill="#4FC3F7"
+                                d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"></path></svg></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span></span></div>
+</div>
+
+
+
+
+
+
+
+Date du jour:
+
+<div class="FTBzM _3CGDY">
+    <div class="_1zGQT a7otO"><span dir="auto" class="_F7Vk">15.12.2019</span></div>
+</div>
+
+
+
+Image IN :
+
+    <div class="FTBzM _4jEk2 message-in"><span></span>
+        <div class="_1zGQT _26GKj tail"><span class="tail-container"></span><span
+                class="tail-container highlight"></span>
+            <div class="_2Wx_5 _3LG3B">
+                <div class="_3SaET _1Rlp7">
+                    <div>
+                        <div class="_3mdDl" style="width: 330px; height: 330px;"><img
+                                src="blob:https://web.whatsapp.com/d4b0b739-2e14-475c-98a0-1afa7845b6fe"
+                                class="_18vxA" style="width: 100%;">
+                            <div class="_3TrQs"></div>
+                        </div>
+                        <div class="iVt71">
+                            <div class="_3MYI2 _3UgZX"><span class="_3fnHB" dir="auto">22:16</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span></span>
+            <div class="gxf3C" role="button"><span data-icon="forward-chat" class=""><svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" width="25"
+                    height="25"><path fill-rule="evenodd" clip-rule="evenodd"
+                                      fill="#FFF"
+                                      d="M14.248 6.973a.688.688 0 0 1 1.174-.488l5.131 5.136a.687.687 0 0 1 0 .973l-5.131 5.136a.688.688 0 0 1-1.174-.488v-2.319c-4.326 0-7.495 1.235-9.85 3.914-.209.237-.596.036-.511-.268 1.215-4.391 4.181-8.492 10.361-9.376v-2.22z"></path></svg></span>
+            </div>
+        </div>
+    </div>
+
+
+
+SYSTEM (jaune):
+
+<div class="FTBzM _3CGDY" >
+<span></span><div class="_1zGQT S-bQb a7otO tail"><span class="tail-container"></span><span class="tail-container highlight"></span><div class="_2Wx_5"><div role="button"><span><span dir="ltr" class="_F7Vk">Le code de sécurité de auteur2 a changé. Cliquez pour plus d'informations.</span></span></div></div><span></span></div>
+</div>
+
+System (bleu)
+<div class="FTBzM _3CGDY">
+<span></span><div class="_1zGQT a7otO tail"><span class="tail-container"></span><span class="tail-container highlight"></span><div class="_2Wx_5"><span class="_1_8_q"><span dir="ltr" class="_F7Vk selectable-text invisible-space copyable-text"><span dir="auto" class="_1ovWX _18GNg _F7Vk">+41 77 481 47 75</span> a créé ce groupe</span></span></div><span></span></div>
+</div>
+
+
+----------------------------- Pas utilisable avec export en txt -----------------------------------------------------------
+
+message avec réponse:
+                                    <div class="FTBzM message-out"><span></span>
+                                        <div class="_1zGQT _2ugFP tail"><span class="tail-container"></span><span
+                                                class="tail-container highlight"></span>
+                                            <div class="_2Wx_5 _3LG3B">
+                                                <div class="-N6Gq">
+                                                    <div class="copyable-text"
+                                                         data-pre-plain-text="[22:12, 17.12.2019] SLynux: ">
+                                                        <div class="_2FaAB">
+                                                            <div class="Drque">
+                                                                <div class="_2HTIU" role="button"><span
+                                                                        class="bg-color-1 _1dvF4"></span>
+                                                                    <div class="_3LVMN">
+                                                                        <div class="SdGy6">
+                                                                            <div class="_1QjgA color-1" role="button">
+                                                                                <span dir="auto" class="_1uQFN _F7Vk">Altin Zili</span>
+                                                                            </div>
+                                                                            <div class="_2HHbr" dir="ltr" role="button">
+                                                                                <span dir="auto"
+                                                                                      class="quoted-mention _F7Vk">Tu dors ???</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="_12pGw" dir="ltr"><span dir="ltr"
+                                                                                            class="_F7Vk selectable-text invisible-space copyable-text"><span>Non.</span></span><span
+                                                                class="EopGb _3HIqo"></span></div>
+                                                    </div>
+                                                    <div class="_1RNhZ">
+                                                        <div class="_3MYI2" role="button"><span class="_3fnHB"
+                                                                                                dir="auto">22:12</span>
+                                                            <div class="_370iZ"><span data-icon="msg-dblcheck-ack"
+                                                                                      class=""><svg id="Layer_1"
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    viewBox="0 0 16 15"
+                                                                                                    width="16"
+                                                                                                    height="15"><path
+                                                                    fill="#4FC3F7"
+                                                                    d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"></path></svg></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span></span></div>
+                                    </div>
+
