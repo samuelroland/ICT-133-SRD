@@ -16,4 +16,3 @@ Artiste: met la réponse du controlleur en forme dans le cadre (une page).
 ## Explication technique:
 Aucun "echo " dans les fichiers suivants:
 - controller.php
-- 
