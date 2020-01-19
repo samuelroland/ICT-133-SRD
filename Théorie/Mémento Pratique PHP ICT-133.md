@@ -1,5 +1,5 @@
-# Mémento PHP ICT-133
-### Les bases du php, les spécialités et points importants.
+# Mémento PHP orienté pratique ICT-133
+## Les bases du php, les spécialités et points importants.
 
 ### Règles et notions générales:
 - Pas besoin de déclarer les variables et leur type.
@@ -18,7 +18,7 @@ quand il n'y a qu'une valeur à afficher (plus besoin de `echo` du coup).
 >$x = 12;<br>
 $y = "Hello";
 
-Attention comme il n'y a pas de déclaration du types de variables. Attention à ne pas avoir deux variables différentes avec le même nom (pour deux valeurs différentes):
+Attention comme il n'y a pas de déclaration du types de variables, de ne pas avoir deux variables différentes avec le même nom (pour deux valeurs différentes):
 
 >$x = 12;<br>
 $x = "Hello";
@@ -31,7 +31,7 @@ Les variables peuvent **changer de type** au cours du code. On peut faire un cha
 
 `switch($i){ ... ` on peut donc l'utiliser comme un int
 
-puis on fait `$i .= ""` on le concatène (.= meme principe que +=) et il devient de type string.
+puis on fait `$i .= ""` on le concatène avec rien (.= meme principe que +=) et il devient de type string.
 
 
 #### Manipulation de chaines de caractères:
@@ -75,10 +75,10 @@ Thu, 28 Nov 2019 11:41:02 +0100<br>
 
 
 #### Principe du gabarit:
-La gabarit c'est un modèle (concretement une page html qui contient en-tête et pied de page) et qui contient des zones qui sont générées par d'autres pages. C'est un template.
+La gabarit c'est un modèle (concrètement une page html qui contient en-tête et pied de page) et qui contient des zones qui sont générées par d'autres pages. C'est un template.
 
 #### MVC
-MVC = Modèle, Vue et Contrôleur. Cela consiste à séparer les données, de ce qui est affiché et de la logique effectuée. Détails dans [MVC explication.md]('MVC explication.md')
+MVC = Modèle, Vue et Contrôleur. Cela consiste à séparer les données, de ce qui est affiché et de la logique effectuée, en séparant les pages php qui ont un rôle bien précis. Détails dans !![MVC explication.md]
 
 #### Lier les pages:
 Puisque chaque pages à un but particulier (en MVC) mais qu'une seule page ne suffit pas, il faut pouvoir les lier.
@@ -96,7 +96,7 @@ Différences: si le fichier appelé n'existe pas:
 - include: n'inclut rien.
 
 
-ATTENTION: Comme les pages php sont comme copiés collés dans le fichier qui faire require,  le **chemin relatif** des fichiers sont relatifs **par rapport à la première page**(page demandée dans la requête). 
+ATTENTION: Comme les pages php sont comme copiés collés dans le fichier qui faire require,  le **chemin relatif** des fichiers sont relatifs **par rapport à la première page** (page demandée dans la requête).
 
 Toutes les variables en dehors de celles des fonctions sont accessibles directement par toutes les pages. Attention cependant à l'ordre dans lequel sont liés les pages et à l'initialisation des variables.
 
@@ -140,3 +140,68 @@ Pour contourner on peut prendre l'index de l'élément en cours et utiliser le t
 `}`
 
 #### Tableaux:
+
+Traditionnelement un tableau se crée avec la fonction array();
+
+>`$contacts = array("John", "David", "Romain", "Jules");`
+
+La nouvelle syntaxe permet de remplacer `array( ... )` par `[ ... ]`.
+
+3 types de tableaux:
+
+##### Les tableaux indexés (comme en C)
+Les valeurs sont numérotées avec un index partant de 0.<br>
+>`$cars = array("Volvo", "BMW", "Toyota");`
+
+- Volvo est à l'index 0
+- BMW est à l'index 1
+- ...
+
+Pour utiliser tous les éléments il suffit de faire une boucle.
+On écrit ou lit la valeur avec le numéro d'index entre crochet.
+ $cars[index]
+
+
+##### Les tableaux associatifs
+Chaque valeur est lié (`=>`) à une clé. La clé désigne la signification de la valeur.
+
+>`$contactInfo = array(`
+    `'name'      => 'John Doe',`
+    `'address'   => 'Rue de Lausanne 25',`
+    `'NPA'       => 1400,`
+    `'City'      => 'Yverdon'`
+`);`
+
+- John Doe est lié à name
+- 1400 est relié à NPA.
+
+On ne peut pas faire de boucles FOR puisque il n'y a plus d'index, alors on fait une boucle foreach:
+
+>`foreach ($contactInfo as $info){`<br>
+`    echo $info." ";`	ici `$info` prend chaque valeur du tableau.<br>
+`}`<br>
+
+Si on oublie de mettre un clé, un index est automatiquement mis.
+
+Ou alors pour prendre une case dont on connait la clé, on met la clé entre '[' et ']'
+`$contactInfo["name"] = "John Assange";`
+
+
+##### Les tableaux multidimensionnels:
+
+>`$people = array(`<br>
+`    array('Perceval','Arthur','Lancelot','Leodagan'),`<br>
+`    array('Marge','Homer','Bart','Maggie'),`<br>
+`    array('Joe','Jack','William','Averell'),`<br>
+`);`<br>
+
+ou 
+>`$people = [`<br>
+`    ['Perceval','Arthur','Lancelot','Leodagan'],`<br>
+`    ['Marge','Homer','Bart','Maggie'],`<br>
+`    ['Joe','Jack','William','Averell'],`<br>
+`];`<br>
+
+`$people` est ici un tableau indexés de tableaux indexés.
+
+En créant des tableaux dans une case, on obtient un tableau 1D dans un case donc deux dimensions finalement. Il est possible d'avoir autant de dimensions que souhaités.
