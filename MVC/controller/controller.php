@@ -30,7 +30,7 @@ function showConcerts()
 
 function showMovies()
 {
-    require_once "modele/movies.php";
+    require_once "modele/model.php";
 
     $audio = $_POST['audio'];
     $heuremin = $_POST['heuremin'];
@@ -50,12 +50,12 @@ function showMovies()
 
         }
     }
-    require_once "view/movies.php";
+    require_once "view/model.php";
 }
 
 function showmoviesfilter()
 {
-    require_once "modele/movies.php";
+    require_once "modele/model.php";
     require_once "view/moviesfilter.php";
 }
 
