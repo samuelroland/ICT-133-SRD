@@ -78,7 +78,7 @@ Thu, 28 Nov 2019 11:41:02 +0100<br>
 La gabarit c'est un modèle (concrètement une page html qui contient en-tête et pied de page) et qui contient des zones qui sont générées par d'autres pages. C'est un template.
 
 #### MVC
-MVC = Modèle, Vue et Contrôleur. Cela consiste à séparer les données, de ce qui est affiché et de la logique effectuée, en séparant les pages php qui ont un rôle bien précis. Détails dans !![MVC explication.md]
+MVC = Modèle, Vue et Contrôleur. Cela consiste à séparer les données, de ce qui est affiché et de la logique effectuée, en séparant les pages php qui ont un rôle bien précis. Détails dans ![MVC explication.md](MVC explication.md)
 
 #### Lier les pages:
 Puisque chaque pages à un but particulier (en MVC) mais qu'une seule page ne suffit pas, il faut pouvoir les lier.
