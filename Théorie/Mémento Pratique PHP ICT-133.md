@@ -205,3 +205,6 @@ ou
 `$people` est ici un tableau indexés de tableaux indexés.
 
 En créant des tableaux dans une case, on obtient un tableau 1D dans un case donc deux dimensions finalement. Il est possible d'avoir autant de dimensions que souhaités.
+
+Fonctions pour tableau:
+extract();
