@@ -192,14 +192,14 @@ Ou alors pour prendre une case dont on connait la clé, on met la clé entre '['
 >`$people = array(`<br>
 `    array('Perceval','Arthur','Lancelot','Leodagan'),`<br>
 `    array('Marge','Homer','Bart','Maggie'),`<br>
-`    array('Joe','Jack','William','Averell'),`<br>
+`    array('Joe','Jack','William','Averell')`<br>
 `);`<br>
 
 ou 
 >`$people = [`<br>
 `    ['Perceval','Arthur','Lancelot','Leodagan'],`<br>
 `    ['Marge','Homer','Bart','Maggie'],`<br>
-`    ['Joe','Jack','William','Averell'],`<br>
+`    ['Joe','Jack','William','Averell']`<br>
 `];`<br>
 
 `$people` est ici un tableau indexés de tableaux indexés.
