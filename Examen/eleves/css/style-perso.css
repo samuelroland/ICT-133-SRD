@@ -1,0 +1,16 @@
+/**
+ *  Projet: Examen ICT-133
+ *  File: page style-perso.css additionnal styles
+ *  Author: Samuel Roland SI-MI2A
+ *  Creation date: 31.01.2020
+ */
+
+.menu .avatar{
+    height: 25px;
+}
+.avatar{
+    height: 40px;
+}
+#listofbooks td, #listofbooks th {
+    text-align: center;
+}

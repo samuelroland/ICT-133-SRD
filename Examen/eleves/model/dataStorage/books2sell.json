@@ -1,0 +1,32 @@
+[
+    {
+      "quantity": "3",
+      "title":"Anglais ECG2",
+      "state": "presque neuf",
+      "price":"10.-"
+    },
+    {
+      "quantity": "3",
+      "title":"Anglais ECG2",
+      "state": "presque neuf",
+      "price":"10.-"
+    },
+    {
+      "quantity": "1",
+      "title":"Mme Bovary (Flaubert)",
+      "state": "neuf",
+      "price":"5.-"
+    },
+    {
+      "quantity": "1",
+      "title":"Sprechen Deutsch",
+      "state": "usagé",
+      "price":"2.-"
+    }, 
+    {
+      "quantity": "4",
+      "title":"Hamlet (Shakespeare)",
+      "state": "Neuf",
+      "price":"16.-"
+    }
+ ]
