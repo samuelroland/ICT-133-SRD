@@ -16,8 +16,8 @@ quand il n'y a qu'une valeur à afficher (plus besoin de echo du coup).
 
 - Il y a des `;` à la fin des lignes !
 
-    $x = 12;
-    $y = "Hello";
+        $x = 12;
+        $y = "Hello";
 
 Attention comme il n'y a pas de déclaration du types de variables, de ne pas avoir deux variables différentes avec le même nom (pour deux valeurs différentes):
 
@@ -99,7 +99,7 @@ Différences: si le fichier appelé n'existe pas:
 - `include`: n'inclut rien.
 
 
-ATTENTION: Comme les pages php sont comme copiés collés dans le fichier qui faire require,  le **chemin relatif** des fichiers sont relatifs **par rapport à la première page** (page demandée dans la requête).
+**ATTENTION**: Comme les pages php sont comme copiés collés dans le fichier qui faire require,  le **chemin relatif** des fichiers sont relatifs **par rapport à la première page** (page demandée dans la requête donc `index.php` pour nous).
 
 Toutes les variables en dehors de celles des fonctions sont accessibles directement par toutes les pages. Attention cependant à l'ordre dans lequel sont liés les pages et à l'initialisation des variables.
 
@@ -109,9 +109,9 @@ Permettre de générer un certain contenu sans l'afficher directement mais en fa
 
 Fonctions pour le buffer:
 
-ob_start();	output buffer start = met un charriot à la sortie de la salle. (tout ce qui va suivre ca va dans le buffer)
-
-$content =  ob_get_clean();	on récupère le contenu du charriot et on le met dans $content
+`ob_start();`	output buffer start = met un charriot à la sortie de la salle. (tout ce qui va suivre/sortir ca va dans le buffer)
+    
+`$content =  ob_get_clean();`	on récupère (get) le contenu du charriot et on le met dans `$content` et on vide le charriot (clean)
 
 
 Exemple:
