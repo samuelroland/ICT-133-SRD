@@ -10,8 +10,82 @@
     echo "salut";
     ?>
 
-Syntaxe simplifiée de la balise php: On peut remplacer: <?php echo $name ?> par <?= $name ?>
-quand il n'y a qu'une valeur à afficher (plus besoin de echo du coup).
+### Résumé des syntaxes:
+
+#### Les instructions et boucles
+If (condition "si")
+
+    if ($i > 5){
+        echo $i;
+    }
+
+If ... else... (condition "si...sinon...")
+
+    if ($i > 5){
+        echo $i;
+    }else {
+        echo "erreur";
+    }
+
+For (boucle)
+
+    for ($i=0; $i<4; $i++){
+        echo "Numéro $i";
+    }
+
+While (boucle "tant que")
+
+    while ($i == null){
+        $j++;
+        if ($j > 8){
+            $i = $j;
+        }
+    }
+
+Switch (condition "commutateur")
+
+    switch ($age){
+        case 5:
+            echo "Vous êtes un enfant.";
+            break;
+        case 15:
+            echo "Vous êtes un ado.";
+            break;
+        case 18:
+            echo "Vous êtes un adulte.";
+            break;
+        case 90:
+            echo "Vous êtes retraité.";
+            break;
+    }
+    
+
+Foreach (boucle "pour chaque")
+--> voir plus bas.
+
+#### Déclaration de fonction
+Sans paramètre:
+
+    function homepage(){
+        echo "Bienvenu sur la page d'accueil";
+        ...
+    }
+    
+Avec paramètres:
+
+    function details($id, $model){
+        echo "Détails du snow $model";
+        echo "son id est $id";
+        ...
+    }
+
+#### Raccourci d'opérations:
+`$i = $i + 2;` => `$i += 2;`
+
+`$string = $string . " cool";` => `$string .= " cool";`
+
+#### Syntaxe simplifiée de la balise php: 
+On peut remplacer: `<?php echo $name ?>` par `<?= $name ?>` quand il n'y a qu'une valeur à afficher (plus besoin de echo du coup).
 
 
 - Il y a des `;` à la fin des lignes !
@@ -24,7 +98,9 @@ Attention comme il n'y a pas de déclaration du types de variables, de ne pas av
     $x = 12;
     $x = "Hello";
 
-Les variables peuvent **changer de type** au cours du code. On peut faire un changement implicite par un calcul:
+Les variables n'ont pas de type fixes et définis au départ (string, boolean, int, float, double, ...) comme dans d'autres langages. Cependant les variables peuvent **changer de type** au cours du code. On peut faire un changement implicite en faisant une action propre au type qu'on veut avoir.
+
+Exemple: On veut convertir `$i` (qui est en string) à un int.
 
     $i = $_GET['month'];  	//$i est de type string:
     
