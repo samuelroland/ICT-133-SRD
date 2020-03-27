@@ -127,11 +127,13 @@ Beaucoup d'autres fonctions existent sur https://www.php.net :
 
 #### Affichage de dates:
 date ( string $format [, int $timestamp = time() ] ) : string
+
 $format = format voulu ("Y-m-d" par exemple).
+
 $timestamp = par défaut le temps de maintenant ou une date donnée.
 
-Toutes les syntaxes sont sur ce lien pour la fonction date()
-https://www.php.net/manual/en/function.date.php
+Toutes les syntaxes sont sur [ce lien pour la fonction date()]
+(https://www.php.net/manual/en/function.date.php)
 
 Pour se mettre sur le fuseau horaire de la suisse, on ajoute:
 `date_default_timezone_set("Europe/Zurich");`
