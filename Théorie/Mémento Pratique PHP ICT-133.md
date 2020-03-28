@@ -73,9 +73,10 @@ Sans paramètre:
     
 Avec paramètres:
 
-    function details($id, $model){
-        echo "Détails du snow $model";
-        echo "son id est $id";
+    function details($type, $model){
+        if (type == 4){
+            echo "Le snow du modèle $model est mort.";
+        }
         ...
     }
 
@@ -117,10 +118,10 @@ Avec l'acronyme **MERCI**:
 - **Mesurer**: `count($tableau`) retourne nombres d'éléments du tableaux, ou `strlen($myrandomstring)` retourne la longueur de la chaine.
 - **Extraire**: `substr(thestring, startpos, length)` retourne la chaine extraite
 - **Rechercher**: `stripos ( string $haystack , mixed $needle [, int $offset = 0 ] ) : int` cherche une aiguille dans une botte de foin donc une sous chaine dans une chaine.
-- **Concaténer**: `<li>Produit ".$i."</li>` On met un "." au lieu du "+" en C#. 
-- **Interpoler**: `<li>Produit $i</li>` mais double guillemets obligatoires. Attention, ça ne fonctionne pas avec les tableaux ! On utilise donc la concaténation pour les tableaux.
+- **Concaténer**: `<li>Produit numéro " . $i . "</li>` ou `<li>Connecté en " . $user['firstname'] . "</li>` On met un "." au lieu du "+" en C#. 
+- **Interpoler**: `<li>Produit numéro $i</li>`. Attention double guillemets obligatoires et ça ne fonctionne pas avec les tableaux ! Dans ce cas on doit utiliser la concaténation, ou alors on entoure le tableau de `{` `}` ce qui donne: `<li>Connecté en {$user['firstname']}</li>`
 
-Beaucoup d'autres fonctions existent sur https://www.php.net :
+Beaucoup d'autres fonctions existent sur [php.net](https://www.php.net) et particulièrement ici [à propos des chaines de caractères](https://www.php.net/ref.strings):
 - `str_replace("_", " ", $filename`) remplacer les "_" par des " " dans filename.
 - `str_repeat ( string $input , int $multiplier ) : string` Repeat a string 
 - `substr_count()` --> Count the number of substring occurrences
@@ -221,7 +222,7 @@ Pour contourner on peut prendre l'index de l'élément (ici `$i`) en cours et ut
         unset(listofconcerts[$i]);
     }
 
-#### Tableaux:
+### Tableaux:
 
 Traditionnelement un tableau se crée avec la fonction `array();`
 
@@ -231,7 +232,7 @@ La nouvelle syntaxe permet de remplacer array( ... ) par [ ... ].
 
 3 types de tableaux:
 
-##### Les tableaux indexés (comme en C)
+#### Les tableaux indexés (comme en C)
 Les valeurs sont numérotées avec un index partant de 0.
 
     $cars = array("Volvo", "BMW", "Toyota");
@@ -245,7 +246,7 @@ On écrit ou lit la valeur avec le numéro d'index entre crochet.
  $cars[index]
 
 
-##### Les tableaux associatifs
+#### Les tableaux associatifs
 Chaque valeur est lié (=>) à une clé. La clé désigne la signification de la valeur.
 
     $contactInfo = array(
@@ -271,7 +272,7 @@ Ou alors pour prendre une case dont on connait la clé, on met la clé entre '['
     $contactInfo["name"] = "John Assange";
 
 
-##### Les tableaux multidimensionnels:
+#### Les tableaux multidimensionnels:
 
     $people = array(
         array('Perceval','Arthur','Lancelot','Leodagan'),
