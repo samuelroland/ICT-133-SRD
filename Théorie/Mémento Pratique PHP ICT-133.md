@@ -3,7 +3,7 @@
 
 ### Règles et notions générales:
 - Pas besoin de déclarer les variables et leur type.
-- Toutes les variables commencent par $. Ca indique que ce qui suit c'est une variable. Ex: `$age = 18;`
+- Toutes les variables commencent par `$`. Ca indique que ce qui suit c'est une variable. Ex: `$age = 18;`
 - Tout le code php se trouve dans une balise PHP:
 
     <?php
@@ -145,7 +145,7 @@ Chaque valeur est lié (=>) à une clé. La clé désigne la signification de la
 - John Doe est lié à name
 - 1400 est relié à NPA.
 
-On ne peut pas faire de boucles FOR puisque il n'y a plus d'index, alors on fait une boucle foreach:
+On ne peut pas faire de boucles FOR puisque il n'y a plus d'index, alors on fait une boucle foreach (voir théorie du foreach plus bas):
 
     foreach ($contactInfo as $info){
         echo $info." ";	    //ici $info prend chaque valeur du tableau.
@@ -194,7 +194,7 @@ Avec l'acronyme **MERCI**:
 - **Interpoler**: `<li>Produit numéro $i</li>`. Attention double guillemets obligatoires et ça ne fonctionne pas avec les tableaux ! Dans ce cas on doit utiliser la concaténation, ou alors on entoure le tableau de `{` `}` ce qui donne: `<li>Connecté en {$user['firstname']}</li>`
 
 Beaucoup d'autres fonctions existent sur [php.net](https://www.php.net) et particulièrement ici [à propos des chaines de caractères](https://www.php.net/ref.strings):
-- `str_replace("_", " ", $filename`) remplacer une sous-chaine par une autre. Ex: la chaine "_" par la chaine " " dans $filename.
+- `str_replace("_", " ", $filename`) remplacer une sous-chaine par une autre. Ex: la chaine "_" par la chaine " " dans `$filename`.
 - `str_repeat ( string $input , int $multiplier ) : string` répéter une chaine
 - `substr_count()` --> Compter le nombre d'occurences d'une sous-chaine.
 
@@ -286,7 +286,7 @@ Exemple:
     $content = ob_get_clean();recevoir le buffer
     ?>
 
-`isset($_GET['action']);` retourne si la **variable** est existe (false si n'existe pas). Attention vide ne veut pas dire non-existant. Si $prenom = ""; alors $prenom existe mais est vide. Pour savoir si une variable est vide ou non on utilisera `""` ou alors `empty()`
+`isset($_GET['action']);` retourne si la **variable** est existe (false si n'existe pas). Attention vide ne veut pas dire non-existant. Si on fait `$prenom = "";` alors `$prenom` existe mais est vide. Pour savoir si une variable est vide ou non on utilisera `""` ou alors `empty();`
 
 `unset();`	détruit une variable. Elle n'existe plus.
 
@@ -330,7 +330,7 @@ Maintenant affichons la liste des concerts avec leur nom et leur date
         echo "<p>{$concert['name']} le <em>{$concert['date']}</em>.</p>";
     }
 
-Imaginons maintenant qu'on veut modifier le tableau $listofconcerts parce qu'on veut ne pas afficher les concerts après le `2020-03-30`. On a besoin de modifier le tableau et de supprimer les concerts après cette date. Sauf que de faire un unset() sur $concert de la manière suivante...
+Imaginons maintenant qu'on veut modifier le tableau `$listofconcerts` parce qu'on veut ne pas afficher les concerts après le `2020-03-30`. On a besoin de modifier le tableau et de supprimer les concerts après cette date. Sauf que de faire un unset() sur `$concert` de la manière suivante...
 
     foreach ($listconcerts as $concert){
         if ($concert['date'] >"2020-03-30"){
@@ -340,7 +340,7 @@ Imaginons maintenant qu'on veut modifier le tableau $listofconcerts parce qu'on 
 
 ... ça ne fonctionne pas !
 
-C'est différent qu'en C# et l'élément $concert n'est qu'une copie et pas un lien sur l'élément réel. C'est parfait pour accéder en lecture mais pas fait pour faire des modifications ou des suppressions.
+C'est différent qu'en C# et l'élément `$concert` n'est qu'une copie et pas un lien sur l'élément réel. C'est parfait pour accéder en lecture mais pas fait pour faire des modifications ou des suppressions.
 
 Pour résoudre ce problème de copie, il existe un deuxième syntaxe du foreach que voici. 
 On peut prendre l'index de l'élément (ici `$i`) en cours et utiliser le tableau réel:
