@@ -85,7 +85,6 @@ Switch (condition "commutateur")
             echo "Vous êtes retraité.";
             break;
     }
-    
 
 Foreach (boucle "pour chaque")
 --> voir plus bas.
@@ -110,13 +109,19 @@ Avec paramètres:
 
 ### Tableaux:
 
-Traditionnelement un tableau se crée avec la fonction `array();`
+Dans un langage qui demande de définir un type aux données, un tableau, est **un ensemble de valeur de même type**. Sauf que en php ce n'est pas le cas et donc aucun problème technique pour déclarer ça: `$test = [0, 0.5, "salut", 'x', true];`. Donc pleins de types différents dans le même tableau!
+
+*Mais alors c'est un ensemble de quoi ?*
+
+C'est un ensemble de valeurs et/ou de tableaux... désolé pour ce flou, mais je ne vois pas plus précis.
+
+Traditionnelement, un tableau se crée avec la fonction `array();`
 
     $contacts = array("John", "David", "Romain", "Jules");
 
-La nouvelle syntaxe permet de remplacer array( ... ) par [ ... ].
+La nouvelle syntaxe simplifiée permet de remplacer array( ... ) par [ ... ].
 
-3 types de tableaux:
+Il existe 3 types de tableaux que nous allons voir maintenant en détail, avec des données concrètes.
 
 #### Les tableaux indexés (comme en C)
 Les valeurs sont numérotées avec un index partant de 0 par défaut. Si on définit l'index nous-même (en indexant avec l'id par exemple), on aura les index choisis.
@@ -133,7 +138,6 @@ On écrit ou lit la valeur en trouvant l'index grâce à la variable d'itératio
     for ($i = 0; $i < 3; $i++){
         echo $cars[$i];
     }
-    
 
 Exemple: 
 
@@ -252,7 +256,7 @@ Vous aurez donc l'équivalent de ce résultat:
 
 **ATTENTION**: on remarque ici la présence d'un **nouveau tableau `$newlist`**. Ceci est très important parce que si vous utilisez `$listofconcerts`, vous aurez un mélange de doublons et d'écrasements, puisque les données aux index 0, 1 et 2 n'ont pas été supprimées.
 
-Pour être concret, vous aurez un tableau comme ceci:
+Pour être concret, vous aurez un tableau comme ceci si vous faite cette erreur:
 
     $listofconcerts = [
         0 => [
@@ -295,8 +299,19 @@ Pour être concret, vous aurez un tableau comme ceci:
 
 Donc des simples doublons assez perturbant et problématique. Pas d'écrasement ici, mais le ca aurait été le cas si une id valait 0, 1 ou 2.
 
+##### Conclusion pour les tableaux:
+Quand on regarde (souvent) les valeurs contenus dans un tableau, on ne peut pas faire un simple `echo $tableau`, parce que le résultat sera `Array` ce qui ne nous donne pas beaucoup d'informations sur son contenu...
+
+Il existe donc **2 fonctions très utiles** qui permettent d'**afficher le contenu d'un tableau** avec un design, et aussi évidemment une simple variable:
+- `var_dump($tableau);`
+- `print_r($tableau);`
+
+Le **design est un peu différent** et surtout l'une des deux se prête mieux à l'**affichage en navigateur** et l'autre à l'**affichage en mode console** dans un shell (pour faire des tests unitaires sur des fonctions par exemple...). 
+
+A vous de tester et de regarder lesquels vous voulez utiliser. Elles restent **très très pratique pour avoir une vue compréhensible** du contenu d'un tableau, et doivent être, selon moi, utilisé sans modération.
+
 #### Manipulation de chaines de caractères:
-Avec l'acronyme **MERCI**:
+Les différentes manipulations résumées avec l'acronyme **MERCI**:
 
 - **Mesurer**: `count($tableau`) retourne nombres d'éléments du tableaux, ou `strlen($myrandomstring)` retourne la longueur de la chaine.
 - **Extraire**: `substr(thestring, startpos, length)` retourne la chaine extraite
@@ -484,11 +499,42 @@ Au lieu d'afficher chaque partie l'une après l'autre, on utilise le foreach, ma
         echo "<p>$piece</p>";
     }
 
+Voilà. Vous devriez avoir toutes les informations pour travailler correctement avec le foreach.
+
+
 ### Les variables superglobales
 Il existe des variables qui ont des fonctionnements particulier et qui sont accessibles partout dans le code.
 
+"Les Superglobales sont des variables internes qui sont toujours disponibles, quel que soit le contexte" tiré de [la doc sur les superglobales](https://www.php.net/manual/fr/language.variables.superglobals.php)
+
+ Les variables superglobales sont :
+
+- `$GLOBALS`
+- `$_SERVER`
+- `$_GET`
+- `$_POST`
+- `$_FILES`
+- `$_COOKIE`
+- `$_SESSION`
+- `$_REQUEST`
+- `$_ENV`
+
+Ce sont des variables qui existent constamment et sont accessibles depuis partout (toutes les pages).
+
+Quelques exemples des plus couramment utilisées:
+- `$_GET` contient toutes les données envoyées par méthode GET (également visible dans l'url)
+- `$_POST` contient toutes les données envoyées par méthode POST (non visible dans l'url)
+- `$_SERVER` donne des informations sur le serveur et les requêtes HTTP.
+- `$_SESSION` contient des données relatives à la session en cours. (par défaut vide, mais remplit par le code php qui l'utilise).
+
+
 ### Le concept de la session
-Sans se concept, le serveur recoit des requêtes de plusieurs utilisateurs qui demandent chacun plusieurs pages, mais le serveur ne peut pas savoir si 
+Sans ce concept, le serveur recoit des requêtes de plusieurs utilisateurs qui demandent chacun plusieurs pages, mais le serveur ne peut pas savoir si une requête est faite par la même personne que sur une requête précédente. Impossible donc de se connecter puisque à la prochaine requête pour une nouvelle page, le serveur ne pourra pas nous différencier de quelqu'un d'autre...
+
+Donc il lui faut un moyen d'identifier les ordinateurs et ainsi les reconnaitre.
+Pour cela, un cookie est utilisé. Ce cookie est renvoyé à chaque requête, et s'il n'existe pas il est donné par le serveur. L'envoi de ces cookies est complétement gérée seule. Enfin il faut quand même lancer le mécanisme avec un `session_start();` 
+
+WIP
 
 ### Le concept du login
 Le login (la connexion en francais) est présent sur beaucoup de site web puisque c'est un moyen simple d'authentifier un utilisateur. Sur la base de théorie de ce mémento, il est possible d'apprendre à gérer 
