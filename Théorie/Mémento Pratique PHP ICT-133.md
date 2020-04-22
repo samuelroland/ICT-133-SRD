@@ -119,7 +119,7 @@ La nouvelle syntaxe permet de remplacer array( ... ) par [ ... ].
 3 types de tableaux:
 
 #### Les tableaux indexés (comme en C)
-Les valeurs sont numérotées avec un index partant de 0.
+Les valeurs sont numérotées avec un index partant de 0 par défaut. Si on définit l'index nous-même (en indexant avec l'id par exemple), on aura les index choisis.
 
     $cars = array("Volvo", "BMW", "Toyota");
 
@@ -128,18 +128,27 @@ Les valeurs sont numérotées avec un index partant de 0.
 - ...
 
 Pour utiliser tous les éléments il suffit de faire une boucle.
-On écrit ou lit la valeur avec le numéro d'index entre crochet.
- $cars[index]
+On écrit ou lit la valeur en trouvant l'index grâce à la variable d'itération de notre boucle (ici `$i`).
 
+    for ($i = 0; $i < 3; $i++){
+        echo $cars[$i];
+    }
+    
+
+Exemple: 
+
+    $cars[1] = "Volvo";
+    $cars[6] = "BMW";
+    $cars[4] = "Toyota";
 
 #### Les tableaux associatifs
 Chaque valeur est lié (=>) à une clé. La clé désigne la signification de la valeur.
 
     $contactInfo = array(
-        'name'      => 'John Doe',
-        'address'   => 'Rue de Lausanne 25',
-        'NPA'       => 1400,
-        'City'      => 'Yverdon'
+        'name' => 'John Doe',
+        'address' => 'Rue de Lausanne 25',
+        'NPA' => 1400,
+        'City' => 'Yverdon'
     );
 
 - John Doe est lié à name
@@ -183,6 +192,108 @@ Fonctions intéressantes pour tableau:
 `implode();` Rassemble les éléments d'un tableau en une chaîne
 ...
 
+Comme dit précèdemment, on peut indexer manuellement au lieu d'automatiquement si ça a un intêret. 
+
+Voici un exemple dans lequel cela pourrait être intéressant avec les données suivantes (une liste des concerts avec les concerts indexés automatiquement):
+
+    $listofconcerts = [
+        0 => [
+            "id" => 15,
+            "name" => "The big night",
+            "date" => "2020-02-15",
+            "artist_id" => 8
+        ],
+        1 => [
+            "id" => 7,
+            "name" => "Great deal",
+            "date" => "2020-03-15",
+            "artist_id" => 5
+        ],
+        2 => [
+            "id" => 12,
+            "name" => "The perfection",
+            "date" => "2020-05-09",
+            "artist_id" => 19
+        ],
+    ];
+
+Ce qui n'est pas pratique, c'est que pour prendre le concert avec l'id 7, on devra parcourir le tableau à l'aide d'une boucle pour rechercher le concert recherché.
+
+Maintenant si on décide d'indexer manuellement:
+
+    foreach ($listofconcerts as $oneconcert){
+        $newlist[$oneconcert['id']] = $oneconcert;
+    }
+    
+... il suffira de faire `$newlist[7]` pour atteindre le concert avec l'id 7 !
+
+Vous aurez donc l'équivalent de ce résultat:
+
+    $newlist = [
+        15 => [
+            "id" => 15,
+            "name" => "The big night",
+            "date" => "2020-02-15",
+            "artist_id" => 8
+        ],
+        7 => [
+            "id" => 7,
+            "name" => "Great deal",
+            "date" => "2020-03-15",
+            "artist_id" => 5
+        ],
+        12 => [
+            "id" => 12,
+            "name" => "The perfection",
+            "date" => "2020-05-09",
+            "artist_id" => 19
+        ]
+    ];
+
+**ATTENTION**: on remarque ici la présence d'un **nouveau tableau `$newlist`**. Ceci est très important parce que si vous utilisez `$listofconcerts`, vous aurez un mélange de doublons et d'écrasements, puisque les données aux index 0, 1 et 2 n'ont pas été supprimées.
+
+Pour être concret, vous aurez un tableau comme ceci:
+
+    $listofconcerts = [
+        0 => [
+            "id" => 15,
+            "name" => "The big night",
+            "date" => "2020-02-15",
+            "artist_id" => 8
+        ],
+        1 => [
+            "id" => 7,
+            "name" => "Great deal",
+            "date" => "2020-03-15",
+            "artist_id" => 5
+        ],
+        2 => [
+            "id" => 12,
+            "name" => "The perfection",
+            "date" => "2020-05-09",
+            "artist_id" => 19
+        ],
+        15 => [
+            "id" => 15,
+            "name" => "The big night",
+            "date" => "2020-02-15",
+            "artist_id" => 8
+        ],
+        7 => [
+            "id" => 7,
+            "name" => "Great deal",
+            "date" => "2020-03-15",
+            "artist_id" => 5
+        ],
+        12 => [
+            "id" => 12,
+            "name" => "The perfection",
+            "date" => "2020-05-09",
+            "artist_id" => 19
+        ]
+    ];
+
+Donc des simples doublons assez perturbant et problématique. Pas d'écrasement ici, mais le ca aurait été le cas si une id valait 0, 1 ou 2.
 
 #### Manipulation de chaines de caractères:
 Avec l'acronyme **MERCI**:
@@ -294,34 +405,33 @@ Exemple:
 #### Boucle Foreach:
 Littéralement **"pour chaque"**, la boucle foreach permet de **parcourir les éléments d'un tableau**. Elle ressemble à la boucle for dans son fonctionnement mais on travaille avec de manière différente.
 
-La boucle foreach a besoin de 2 données pour pouvoir fonctionnner. Elle a besoin d'un **tableau** (tous les types et les structures sont compatibles) pour pouvoir faire un tour de boucle pour chaque élément du tableau. Et aussi d'une **variable** dans laquel l'élément en cours du tableau puisse être copié.
+La boucle foreach a besoin de 2 données pour pouvoir fonctionnner. Elle a besoin d'un **tableau** (tous les types et les structures sont compatibles) pour pouvoir faire un tour de boucle pour chaque élément du tableau. Et aussi d'une **variable** dans laquel l'élément en cours du tableau puisse être "copié".
 
-L'avantage sur la boucle for c'est tout prendre d'un coup mais aussi surtout de prendre des éléments dont on ne connait pas la clé ou l'index.
+L'avantage sur la boucle for c'est de tout prendre d'un coup mais aussi surtout de prendre des éléments dont on ne connait pas la clé ou l'index.
 
-Si on fait un foreach sur un tableau associatif, la variable de l'élément en cours sera une clé. On peut donc parcourir les données du concert. Par contre si le tableau indexés, l'élément en cours sera un index.
+##### Exemple 1:
 
-
-Prenons les données suivantes comme exemple, `$listofconcerts` étant un tableau indexés de tableaux associatifs.
+Prenons les données suivantes, `$listofconcerts` étant un tableau indexés de tableaux associatifs.
 
     $listofconcerts = [
-      "1"=> [
-        "id"=> 1,
-        "name"=> "The big night",
-        "date"=> "2020-02-15",
-        "artist_id"=> 8
-      ],
-      "2"=> [
-        "id"=> 2,
-        "name"=> "Great deal",
-        "date"=> "2020-03-15",
-        "artist_id"=> 5
-      ],
-      "3"=> [
-        "id"=> 3,
-        "name"=> "The perfection",
-        "date"=> "2020-05-09",
-        "artist_id"=> 19
-      ]
+        0 => [
+            "id" => 15,
+            "name" => "The big night",
+            "date" => "2020-02-15",
+            "artist_id" => 8
+        ],
+        1 => [
+            "id" => 7,
+            "name" => "Great deal",
+            "date" => "2020-03-15",
+            "artist_id" => 5
+        ],
+        2 => [
+            "id" => 12,
+            "name" => "The perfection",
+            "date" => "2020-05-09",
+            "artist_id" => 19
+        ],
     ];
 
 Maintenant affichons la liste des concerts avec leur nom et leur date
@@ -350,7 +460,29 @@ On peut prendre l'index de l'élément (ici `$i`) en cours et utiliser le tablea
             unset($concert);
         }
     }
-WIP
+
+##### Exemple 2:
+
+Prenons d'autres données. Ici on a un contenu d'un article (en lorum ipsum) avec plusieurs parties.
+
+    $article = [
+        "intro" => "Quid de Pythagora?",
+        "corps" => "Lorem ipsum dolor sit amet.",
+        "conclusion" => "Est enim effectrix",
+        "fin" => "Quis enim redargueret?",
+    ];
+
+Ou alors le même contenu, mais structuré en un tableau indexé.
+
+    $article = ["Quid de Pythagora? ", "Lorem ipsum dolor sit amet.", "Est enim effectrix.", "Quis enim redargueret?"];
+
+Dans les deux cas, on aimerait afficher toutes les parties dans des paragraphes `<p></p>`
+
+Au lieu d'afficher chaque partie l'une après l'autre, on utilise le foreach, mais cette fois l'élément en cours sera une clé ou un index, et non un tableau.
+
+    foreach ($article as $piece) {
+        echo "<p>$piece</p>";
+    }
 
 ### Les variables superglobales
 Il existe des variables qui ont des fonctionnements particulier et qui sont accessibles partout dans le code.
