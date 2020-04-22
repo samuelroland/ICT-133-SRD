@@ -3,12 +3,39 @@
 
 ### Règles et notions générales:
 - Pas besoin de déclarer les variables et leur type.
-- Toutes les variables commencent par $. Ca indique que ce qui suit c'est une variable.
+- Toutes les variables commencent par $. Ca indique que ce qui suit c'est une variable. Ex: `$age = 18;`
 - Tout le code php se trouve dans une balise PHP:
 
     <?php
     echo "salut";
     ?>
+
+On peut remplacer: `<?php echo $name; ?>` par `<?= $name ?>` quand il n'y a qu'une valeur à afficher dans un bout de HTML (plus besoin de `echo` du coup ni de `;`).
+
+
+- Toutes les lignes de code en dehors de celle propre au instructions (après `{` ou `case 4:`, voir les instructions plus bas), ont un `;` à la fin. En cas d'oubli ou d'erreur, la page ne pourra pas être générée.
+
+        $x = 12;
+        $y = "Hello";
+
+Attention comme il n'y a pas de déclaration du types de variables, de ne pas avoir deux variables différentes avec le même nom (pour deux valeurs différentes):
+
+    $x = 12;
+    $x = "Hello";
+
+Les variables n'ont pas de type fixes et définis au départ (string, boolean, int, float, double, ...) comme dans d'autres langages. Le type dépend de la valeur contenue. Ainsi si la valeur change de type (on passe de 8 à "bonjour" comme valeur par ex.), les variables **changent de type**. Si on a par exemple une valeur numérique stockée en string (ex: 
+"8") et qu'on a besoin de changer, on peut faire un changement implicite en faisant une action propre au type que l'on veut obtenir.
+
+Exemple avec "8"
+
+    $i = "8";  	//$i est de type string.
+    
+    $i = $i + 0;	//on fait un calcul (ici on ne veut pas changer la valeur) et le type change.
+     
+    switch($i){ ...  //on peut donc l'utiliser comme un int
+
+puis on fait `$i .= "";` on le concatène avec rien (.= meme principe que +=) et il devient de type string.
+
 
 ### Résumé des syntaxes:
 
@@ -80,147 +107,6 @@ Avec paramètres:
         ...
     }
 
-#### Raccourci d'opérations:
-`$i = $i + 2;` => `$i += 2;`
-
-`$string = $string . " cool";` => `$string .= " cool";`
-
-#### Syntaxe simplifiée de la balise php: 
-On peut remplacer: `<?php echo $name ?>` par `<?= $name ?>` quand il n'y a qu'une valeur à afficher (plus besoin de echo du coup).
-
-
-- Il y a des `;` à la fin des lignes !
-
-        $x = 12;
-        $y = "Hello";
-
-Attention comme il n'y a pas de déclaration du types de variables, de ne pas avoir deux variables différentes avec le même nom (pour deux valeurs différentes):
-
-    $x = 12;
-    $x = "Hello";
-
-Les variables n'ont pas de type fixes et définis au départ (string, boolean, int, float, double, ...) comme dans d'autres langages. Cependant les variables peuvent **changer de type** au cours du code. On peut faire un changement implicite en faisant une action propre au type qu'on veut avoir.
-
-Exemple: On veut convertir `$i` (qui est en string) à un int.
-
-    $i = $_GET['month'];  	//$i est de type string:
-    
-    $i +=0;	//on fait un calcul et le type change.
-    
-    switch($i){ ...  //on peut donc l'utiliser comme un int
-
-puis on fait `$i .= "";` on le concatène avec rien (.= meme principe que +=) et il devient de type string.
-
-
-#### Manipulation de chaines de caractères:
-Avec l'acronyme **MERCI**:
-
-- **Mesurer**: `count($tableau`) retourne nombres d'éléments du tableaux, ou `strlen($myrandomstring)` retourne la longueur de la chaine.
-- **Extraire**: `substr(thestring, startpos, length)` retourne la chaine extraite
-- **Rechercher**: `stripos ( string $haystack , mixed $needle [, int $offset = 0 ] ) : int` cherche une aiguille dans une botte de foin donc une sous chaine dans une chaine.
-- **Concaténer**: `<li>Produit numéro " . $i . "</li>` ou `<li>Connecté en " . $user['firstname'] . "</li>` On met un "." au lieu du "+" en C#. 
-- **Interpoler**: `<li>Produit numéro $i</li>`. Attention double guillemets obligatoires et ça ne fonctionne pas avec les tableaux ! Dans ce cas on doit utiliser la concaténation, ou alors on entoure le tableau de `{` `}` ce qui donne: `<li>Connecté en {$user['firstname']}</li>`
-
-Beaucoup d'autres fonctions existent sur [php.net](https://www.php.net) et particulièrement ici [à propos des chaines de caractères](https://www.php.net/ref.strings):
-- `str_replace("_", " ", $filename`) remplacer les "_" par des " " dans filename.
-- `str_repeat ( string $input , int $multiplier ) : string` Repeat a string 
-- `substr_count()` --> Count the number of substring occurrences
-
-#### Affichage de dates:
-date ( string $format [, int $timestamp = time() ] ) : string
-
-$format = format voulu ("Y-m-d" par exemple).
-
-$timestamp = par défaut le temps de maintenant ou une date donnée.
-
-Toutes les syntaxes sont sur [ce lien pour la fonction date()](https://www.php.net/manual/en/function.date.php)
-
-Pour se mettre sur le fuseau horaire de la suisse, on ajoute:
-`date_default_timezone_set("Europe/Zurich");`
-
-Exemples de syntaxes:
-
-    echo "<li>".date('l d F Y')."</li>";
-    echo "<li>".date('M jS Y')."</li>";
-    echo "<li>".date('d/m/Y H:i a')."</li>"
-    echo "<li>".date('d M Y, H:i:s')."</li>";
-    echo "<li>".date('r')."</li>";
-
-Résultats:
-
-    Thursday 28 November 2019
-    Nov 28th 2019
-    28/11/2019 11:41 am
-    28 Nov 2019, 11:41:02
-    Thu, 28 Nov 2019 11:41:02 +0100
-
-
-#### Principe du gabarit:
-La gabarit c'est un modèle (concrètement une page html qui contient en-tête et pied de page) et qui contient des zones qui sont générées par d'autres pages. C'est un template.
-
-#### MVC
-MVC = Modèle, Vue et Contrôleur. Cela consiste à séparer les données, de ce qui est affiché et de la logique effectuée, en séparant les pages php qui ont un rôle bien précis. Détails dans ![MVC explication.md](MVC explication.md)
-
-#### Lier les pages:
-Puisque chaque pages à un but particulier (en MVC) mais qu'une seule page ne suffit pas, il faut pouvoir les lier.
-
-3 manières de lier les pages entre elles:
-- `require('nomfichier');`
-- `require_once('nomfichier');`
-- `include();`
-
-Dans les 3 cas, le résultat est exactement le même que si on copiait à la place le contenu du fichier appelé.
-
-Différences: si le fichier appelé n'existe pas:
-- `require()`: crash
-- `require_once()`: crash
-- `include`: n'inclut rien.
-
-
-**ATTENTION**: Comme les pages php sont comme copiés collés dans le fichier qui faire require,  le **chemin relatif** des fichiers sont relatifs **par rapport à la première page** (page demandée dans la requête donc `index.php` pour nous).
-
-Toutes les variables en dehors de celles des fonctions sont accessibles directement par toutes les pages. Attention cependant à l'ordre dans lequel sont liés les pages et à l'initialisation des variables.
-
-#### Buffer (mémoire tampon)
-Utilité:
-Permettre de générer un certain contenu sans l'afficher directement mais en faisant comme si on l'affichait. Donc on fait des echo et des bouts de html seuls mais ca n'est pas affiché. Ca va dans le buffer.
-
-Fonctions pour le buffer:
-
-`ob_start();`	output buffer start = met un charriot à la sortie de la salle. (tout ce qui va suivre/sortir ca va dans le buffer)
-    
-`$content =  ob_get_clean();`	on récupère (get) le contenu du charriot et on le met dans `$content` et on vide le charriot (clean)
-
-
-Exemple:
-
-    <?php
-    ob_start();	//départ du buffer
-    ?>
-        <a href='?action=movies'><img src="images/movies.jpg" alt="movies" height="250px"></a>
-        <a href='?action=concerts'><img src="images/concerts.jpg" alt="movies" height="250px"></a>
-    <?php
-    $content = ob_get_clean();recevoir le buffer
-    ?>
-
-`isset($_GET['action']);` retourne si la **variable** est définie (false si n'existe pas)
-
-`unset();`	détruit une variable. Elle n'existe plus.
-
-
-#### Boucle Foreach:
-Littéralement "pour chaque" donc c'est une boucle for améliorée qui prend tous les éléments. Pas besoin de savoir combien il y en a.
-C'est différent qu'en C# et l'élément $concert n'est qu'une copie et pas un lien sur l'élément réel. C'est parfait pour accéder en lecture mais pas fait pour faire des modifications ou des suppressions.
-
-    foreach($listconcerts as $concert){
-        echo $concert['name'];
-    }
-
-Pour contourner on peut prendre l'index de l'élément (ici `$i`) en cours et utiliser le tableau réel:
-
-    foreach($listofconcerts as $i => $concert){
-        unset(listofconcerts[$i]);
-    }
 
 ### Tableaux:
 
@@ -292,7 +178,187 @@ ou
 
 En créant des tableaux dans une case, on obtient un tableau 1D dans un case donc deux dimensions finalement. Il est possible d'avoir autant de dimensions que souhaité.
 
-Fonctions pour tableau:
-`extract();`
-`implode();`
+Fonctions intéressantes pour tableau:
+`extract();` extrait les clés d'un tableau et les copie en variables
+`implode();` Rassemble les éléments d'un tableau en une chaîne
 ...
+
+
+#### Manipulation de chaines de caractères:
+Avec l'acronyme **MERCI**:
+
+- **Mesurer**: `count($tableau`) retourne nombres d'éléments du tableaux, ou `strlen($myrandomstring)` retourne la longueur de la chaine.
+- **Extraire**: `substr(thestring, startpos, length)` retourne la chaine extraite
+- **Rechercher**: `stripos ( string $haystack , mixed $needle [, int $offset = 0 ] ) : int` cherche une aiguille dans une botte de foin donc une sous chaine dans une chaine.
+- **Concaténer**: `<li>Produit numéro " . $i . "</li>` ou `<li>Connecté en " . $user['firstname'] . "</li>` On met un "." au lieu du "+" en C# ou en javascript. 
+- **Interpoler**: `<li>Produit numéro $i</li>`. Attention double guillemets obligatoires et ça ne fonctionne pas avec les tableaux ! Dans ce cas on doit utiliser la concaténation, ou alors on entoure le tableau de `{` `}` ce qui donne: `<li>Connecté en {$user['firstname']}</li>`
+
+Beaucoup d'autres fonctions existent sur [php.net](https://www.php.net) et particulièrement ici [à propos des chaines de caractères](https://www.php.net/ref.strings):
+- `str_replace("_", " ", $filename`) remplacer une sous-chaine par une autre. Ex: la chaine "_" par la chaine " " dans $filename.
+- `str_repeat ( string $input , int $multiplier ) : string` répéter une chaine
+- `substr_count()` --> Compter le nombre d'occurences d'une sous-chaine.
+
+#### Raccourci d'opérations:
+Pour un calcul:
+
+`$i = $i + 2;` => `$i += 2;`
+
+Pour une concaténation
+`$string = $string . " cool";` => `$string .= " cool";`
+
+#### Affichage de dates:
+date ( string $format [, int $timestamp = time() ] ) : string
+
+$format = format voulu ("Y-m-d" par exemple).
+
+$timestamp = par défaut le temps de maintenant ou une date donnée.
+
+Toutes les syntaxes sont sur [ce lien pour la fonction date()](https://www.php.net/manual/en/function.date.php)
+
+Pour se mettre sur le fuseau horaire de la suisse, on ajoute:
+`date_default_timezone_set("Europe/Zurich");`
+
+Exemples de syntaxes:
+
+    echo "<li>".date('l d F Y')."</li>";
+    echo "<li>".date('M jS Y')."</li>";
+    echo "<li>".date('d/m/Y H:i a')."</li>"
+    echo "<li>".date('d M Y, H:i:s')."</li>";
+    echo "<li>".date('r')."</li>";
+
+Résultats:
+
+    Thursday 28 November 2019
+    Nov 28th 2019
+    28/11/2019 11:41 am
+    28 Nov 2019, 11:41:02
+    Thu, 28 Nov 2019 11:41:02 +0100
+
+
+#### Principe du gabarit:
+La gabarit c'est un modèle (concrètement une page html qui contient en-tête et pied de page) et qui contient des zones qui sont générées par d'autres pages. C'est un template.
+
+#### MVC
+MVC = Modèle, Vue et Contrôleur. Cela consiste à séparer les données, de ce qui est affiché et de la logique effectuée, en séparant les pages php qui ont un rôle bien précis. Détails dans ![MVC explication.md](MVC explication.md)
+
+#### Lier les pages:
+Puisque chaque pages à un but particulier (en MVC) mais qu'une seule page ne suffit pas, il faut pouvoir les lier.
+
+3 manières de lier les pages entre elles:
+- `require('nomfichier');`
+- `require_once('nomfichier');`
+- `include();`
+
+Dans les 3 cas, le résultat est exactement le même que si on copiait à la place le contenu du fichier appelé.
+
+Différences: si le fichier appelé n'existe pas:
+- `require()`: crash
+- `require_once()`: crash
+- `include`: n'inclut rien.
+
+
+**ATTENTION**: Comme les pages php sont comme copiés collés dans le fichier qui faire require,  le **chemin relatif** des fichiers sont relatifs **par rapport à la première page** (page demandée dans la requête donc `index.php` pour nous).
+
+Toutes les variables en dehors de celles des fonctions sont accessibles directement par toutes les pages. Attention cependant à l'ordre dans lequel sont liés les pages et à l'initialisation des variables.
+
+#### Accessibilité des variables
+Les variables crées 
+
+#### Buffer (mémoire tampon)
+Utilité:
+Permettre de générer un certain contenu sans l'afficher directement mais en faisant comme si on l'affichait. Donc on fait des echo et des bouts de html seuls mais ca n'est pas affiché. Ca va dans le buffer.
+
+Fonctions pour le buffer:
+
+`ob_start();`	output buffer start = met un charriot à la sortie de la salle. (tout ce qui va suivre/sortir ca va dans le buffer)
+    
+`$content =  ob_get_clean();`	on récupère (get) le contenu du charriot et on le met dans `$content` et on vide le charriot (clean)
+
+
+Exemple:
+
+    <?php
+    ob_start();	//départ du buffer
+    ?>
+        <a href='?action=movies'><img src="images/movies.jpg" alt="movies" height="250px"></a>
+        <a href='?action=concerts'><img src="images/concerts.jpg" alt="movies" height="250px"></a>
+    <?php
+    $content = ob_get_clean();recevoir le buffer
+    ?>
+
+`isset($_GET['action']);` retourne si la **variable** est existe (false si n'existe pas). Attention vide ne veut pas dire non-existant. Si $prenom = ""; alors $prenom existe mais est vide. Pour savoir si une variable est vide ou non on utilisera `""` ou alors `empty()`
+
+`unset();`	détruit une variable. Elle n'existe plus.
+
+
+#### Boucle Foreach:
+Littéralement **"pour chaque"**, la boucle foreach permet de **parcourir les éléments d'un tableau**. Elle ressemble à la boucle for dans son fonctionnement mais on travaille avec de manière différente.
+
+La boucle foreach a besoin de 2 données pour pouvoir fonctionnner. Elle a besoin d'un **tableau** (tous les types et les structures sont compatibles) pour pouvoir faire un tour de boucle pour chaque élément du tableau. Et aussi d'une **variable** dans laquel l'élément en cours du tableau puisse être copié.
+
+L'avantage sur la boucle for c'est tout prendre d'un coup mais aussi surtout de prendre des éléments dont on ne connait pas la clé ou l'index.
+
+Si on fait un foreach sur un tableau associatif, la variable de l'élément en cours sera une clé. On peut donc parcourir les données du concert. Par contre si le tableau indexés, l'élément en cours sera un index.
+
+
+Prenons les données suivantes comme exemple, `$listofconcerts` étant un tableau indexés de tableaux associatifs.
+
+    $listofconcerts = [
+      "1"=> [
+        "id"=> 1,
+        "name"=> "The big night",
+        "date"=> "2020-02-15",
+        "artist_id"=> 8
+      ],
+      "2"=> [
+        "id"=> 2,
+        "name"=> "Great deal",
+        "date"=> "2020-03-15",
+        "artist_id"=> 5
+      ],
+      "3"=> [
+        "id"=> 3,
+        "name"=> "The perfection",
+        "date"=> "2020-05-09",
+        "artist_id"=> 19
+      ]
+    ];
+
+Maintenant affichons la liste des concerts avec leur nom et leur date
+
+    foreach($listconcerts as $concert){
+        echo "<p>{$concert['name']} le <em>{$concert['date']}</em>.</p>";
+    }
+
+Imaginons maintenant qu'on veut modifier le tableau $listofconcerts parce qu'on veut ne pas afficher les concerts après le `2020-03-30`. On a besoin de modifier le tableau et de supprimer les concerts après cette date. Sauf que de faire un unset() sur $concert de la manière suivante...
+
+    foreach ($listconcerts as $concert){
+        if ($concert['date'] >"2020-03-30"){
+            unset($concert);
+        }
+    }
+
+... ça ne fonctionne pas !
+
+C'est différent qu'en C# et l'élément $concert n'est qu'une copie et pas un lien sur l'élément réel. C'est parfait pour accéder en lecture mais pas fait pour faire des modifications ou des suppressions.
+
+Pour résoudre ce problème de copie, il existe un deuxième syntaxe du foreach que voici. 
+On peut prendre l'index de l'élément (ici `$i`) en cours et utiliser le tableau réel:
+
+    foreach ($listofconcerts as $i => $concert){
+        if ($concert['date'] >"2020-03-30"){
+            unset($concert);
+        }
+    }
+WIP
+
+### Les variables superglobales
+Il existe des variables qui ont des fonctionnements particulier et qui sont accessibles partout dans le code.
+
+### Le concept de la session
+Sans se concept, le serveur recoit des requêtes de plusieurs utilisateurs qui demandent chacun plusieurs pages, mais le serveur ne peut pas savoir si 
+
+### Le concept du login
+Le login (la connexion en francais) est présent sur beaucoup de site web puisque c'est un moyen simple d'authentifier un utilisateur. Sur la base de théorie de ce mémento, il est possible d'apprendre à gérer 
+
+
