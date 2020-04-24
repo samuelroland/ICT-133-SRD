@@ -196,7 +196,7 @@ Fonctions intéressantes pour tableau:
 `implode();` Rassemble les éléments d'un tableau en une chaîne
 ...
 
-Comme dit précèdemment, on peut indexer manuellement au lieu d'automatiquement si ça a un intêret. 
+Comme dit précèdemment, on peut indexer "manuellement" au lieu d'automatiquement si ça a un intêret. 
 
 Voici un exemple dans lequel cela pourrait être intéressant avec les données suivantes (une liste des concerts avec les concerts indexés automatiquement):
 
@@ -300,7 +300,7 @@ Pour être concret, vous aurez un tableau comme ceci si vous faite cette erreur:
 Donc des simples doublons assez perturbant et problématique. Pas d'écrasement ici, mais le ca aurait été le cas si une id valait 0, 1 ou 2.
 
 ##### Conclusion pour les tableaux:
-Quand on regarde (souvent) les valeurs contenus dans un tableau, on ne peut pas faire un simple `echo $tableau`, parce que le résultat sera `Array` ce qui ne nous donne pas beaucoup d'informations sur son contenu...
+Quand on regarde (souvent) les valeurs contenus dans un tableau, on ne peut pas faire un simple `echo $tableau;`, parce que le résultat affiché sera `Array` ce qui ne nous donne pas beaucoup d'informations sur son contenu...
 
 Il existe donc **2 fonctions très utiles** qui permettent d'**afficher le contenu d'un tableau** avec un design, et aussi évidemment une simple variable:
 - `var_dump($tableau);`
@@ -420,11 +420,11 @@ Exemple:
 #### Boucle Foreach:
 Littéralement **"pour chaque"**, la boucle foreach permet de **parcourir les éléments d'un tableau**. Elle ressemble à la boucle for dans son fonctionnement mais on travaille avec de manière différente.
 
-La boucle foreach a besoin de 2 données pour pouvoir fonctionnner. Elle a besoin d'un **tableau** (tous les types et les structures sont compatibles) pour pouvoir faire un tour de boucle pour chaque élément du tableau. Et aussi d'une **variable** dans laquel l'élément en cours du tableau puisse être "copié".
+La boucle foreach a besoin de 2 données pour pouvoir fonctionnner. Elle a besoin d'un **tableau** (tous les types et les structures sont compatibles) pour pouvoir faire un tour de boucle pour chaque élément du tableau. Et aussi d'une **variable** dans laquel l'élément en cours du tableau puisse être "copié". L'élément en cours peut-être un autre tableau ou une "variable"/directement une valeur.
 
-L'avantage sur la boucle for c'est de tout prendre d'un coup mais aussi surtout de prendre des éléments dont on ne connait pas la clé ou l'index.
+L'avantage sur la boucle for c'est de pouvoir **tout prendre d'un coup**, mais aussi surtout d'atteindre des éléments **dont on ne connait pas la clé ou l'index**.
 
-##### Exemple 1:
+##### Exemple 1 (tableau de tableaux = multidimensionnel):
 
 Prenons les données suivantes, `$listofconcerts` étant un tableau indexés de tableaux associatifs.
 
@@ -449,36 +449,79 @@ Prenons les données suivantes, `$listofconcerts` étant un tableau indexés de 
         ],
     ];
 
-Maintenant affichons la liste des concerts avec leur nom et leur date
+Maintenant affichons la liste des concerts avec leur nom et leur date:
 
-    foreach($listconcerts as $concert){
-        echo "<p>{$concert['name']} le <em>{$concert['date']}</em>.</p>";
-    }
+    foreach ($listofconcerts as $concert) {
+		echo "<p>{$concert['name']} le {$concert['date']}.</p>";
+	}
 
-Imaginons maintenant qu'on veut modifier le tableau `$listofconcerts` parce qu'on veut ne pas afficher les concerts après le `2020-03-30`. On a besoin de modifier le tableau et de supprimer les concerts après cette date. Sauf que de faire un unset() sur `$concert` de la manière suivante...
+Ce qui donne:
 
-    foreach ($listconcerts as $concert){
-        if ($concert['date'] >"2020-03-30"){
-            unset($concert);
-        }
-    }
+	The big night le 2020-02-15.
+	
+	Great deal le 2020-03-15.
+	
+	The perfection le 2020-05-09.
+
+Imaginons maintenant qu'on veut modifier le tableau `$listofconcerts` et qu'on veut ne pas afficher les concerts après le `2020-03-30`. On a besoin de modifier le tableau et de supprimer les concerts après cette date. Sauf que de faire un unset() sur `$concert` de la manière suivante...
+
+	foreach ($listofconcerts as $concert) {
+		if ($concert['date'] > "2020-03-30") {
+			unset($concert);
+		}
+	}
 
 ... ça ne fonctionne pas !
 
-C'est différent qu'en C# et l'élément `$concert` n'est qu'une copie et pas un lien sur l'élément réel. C'est parfait pour accéder en lecture mais pas fait pour faire des modifications ou des suppressions.
+C'est différent qu'en C# ! Car la variable `$concert` n'est qu'une copie et pas un "lien" sur l'élément réel. C'est parfait pour accéder en lecture mais pas prévu pour faire des modifications ou des suppressions.
 
-Pour résoudre ce problème de copie, il existe un deuxième syntaxe du foreach que voici. 
-On peut prendre l'index de l'élément (ici `$i`) en cours et utiliser le tableau réel:
+Pour résoudre ce problème d'accès comme en lecture seule, il existe **une deuxième syntaxe du foreach**. On peut ainsi utiliser l'index de l'élément en cours (ici `$i`) et utiliser le tableau réel avec cet index:
 
-    foreach ($listofconcerts as $i => $concert){
-        if ($concert['date'] >"2020-03-30"){
-            unset($concert);
-        }
+	foreach ($listofconcerts as $i => $concert) {
+		if ($concert['date'] > "2020-03-30") {
+			unset($listofconcerts[$i]);
+		}
+	}
+
+**L'index** n'est pas le numéro de l'élément (j'entends par là de compter un élément après l'autre: 0, 1, 2, 3, 4 ...) mais l'index du tableau $listofconcerts sur lequel est indexé l'élément en cours.
+
+Reprenons un exemple précédent:
+
+    $listofconcerts = [
+        15 => [
+            "id" => 15,
+            "name" => "The big night",
+            "date" => "2020-02-15",
+            "artist_id" => 8
+        ],
+        7 => [
+            "id" => 7,
+            "name" => "Great deal",
+            "date" => "2020-03-15",
+            "artist_id" => 5
+        ],
+        12 => [
+            "id" => 12,
+            "name" => "The perfection",
+            "date" => "2020-05-09",
+            "artist_id" => 19
+        ]
+    ];
+	
+	foreach ($listofconcerts as $i => $concert){
+            echo " Index = $i ";
     }
+	
+Ici l'index `$i` sera successivement 15 puis 7 puis 12. (et nom 0, 1, 2 ou 1, 2, 3). Il ne faut donc pas utiliser `$i` comme un numéro pour savoir combien de concert on a parcouru par exemple...
 
-##### Exemple 2:
+	 Index = 15  Index = 7  Index = 12 
 
-Prenons d'autres données. Ici on a un contenu d'un article (en lorum ipsum) avec plusieurs parties.
+Cette exemple est d'ailleurs *idéal* pour montrer qu'**une boucle for ici n'a plus de sens** puisque les index ne sont pas définis automatiquement.
+
+
+##### Exemple 2 (tableau 1 dimension):
+
+Prenons d'autres données: un tableau simple à une dimension. Ici on a un contenu d'un article (en lorum ipsum) avec plusieurs parties.
 
     $article = [
         "intro" => "Quid de Pythagora?",
@@ -493,13 +536,45 @@ Ou alors le même contenu, mais structuré en un tableau indexé.
 
 Dans les deux cas, on aimerait afficher toutes les parties dans des paragraphes `<p></p>`
 
-Au lieu d'afficher chaque partie l'une après l'autre, on utilise le foreach, mais cette fois l'élément en cours sera une clé ou un index, et non un tableau.
+Au lieu d'afficher chaque partie l'une après l'autre, on utilise le foreach, mais **cette fois l'élément en cours sera une clé ou un index, et non un tableau.**
 
     foreach ($article as $piece) {
         echo "<p>$piece</p>";
     }
 
-Voilà. Vous devriez avoir toutes les informations pour travailler correctement avec le foreach.
+Résultat:
+
+	Quid de Pythagora?
+
+	Lorem ipsum dolor sit amet.
+	
+	Est enim effectrix
+	
+	Quis enim redargueret?
+
+Pour revenir sur la deuxième syntaxe du foreach: 
+
+	$theconcert = [
+		"id" => 15,
+		"name" => "The big night",
+		"date" => "2020-02-15",
+		"artist_id" => 8
+	];
+	
+	foreach ($theconcert as $i => $data) {
+		echo "<br>" . $i . " - " . $data;
+	}
+
+Etant avec un tableau associatif, `$i` est une clé et non un index ! Par contre, c'est la même logique que pour un tableau indexé. Il vaudra successivement: `id`, `name`, `date`, `artist_id`.
+
+Résultat de l'affichage:
+
+	id - 15
+	name - The big night
+	date - 2020-02-15
+	artist_id - 8
+
+Voilà. Après ces exemples pas à pas, vous devriez avoir toutes les informations pour travailler correctement avec le foreach.
 
 
 ### Les variables superglobales
