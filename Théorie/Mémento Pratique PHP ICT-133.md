@@ -36,6 +36,15 @@ Exemple avec "8"
 
 puis on fait `$i .= "";` on le concatène avec rien (.= meme principe que +=) et il devient de type string.
 
+#### Les constantes
+Il est aussi possible de définir des constantes avec `define("CONSTANTE_NAME", <value>);`. 
+
+Exemple:
+
+    define("NOMDUCOURS", "ICT-133");
+
+Ensuite on pourra appeler la constante par son nom et donc sans `$`. `echo NOMDUCOURS;`
+
 
 ### Résumé des syntaxes:
 
@@ -385,10 +394,12 @@ Différences: si le fichier appelé n'existe pas:
 
 **ATTENTION**: Comme les pages php sont comme copiés collés dans le fichier qui faire require,  le **chemin relatif** des fichiers sont relatifs **par rapport à la première page** (page demandée dans la requête donc `index.php` pour nous).
 
-Toutes les variables en dehors de celles des fonctions sont accessibles directement par toutes les pages. Attention cependant à l'ordre dans lequel sont liés les pages et à l'initialisation des variables.
 
 #### Accessibilité des variables
-Les variables crées 
+Les variables créés sont atteignables si on cherche à les atteindre depuis la même fonction. Attention la même fonction peut se trouver sur plusieurs fichiers php lié avec `require*` comme la fonction du controleur qui fait `require*` d'une vue.
+Les variables ne sont pas atteignables directement quand elles se trouvent dans des fonctions différentes ou alors qu'on cherche à atteindre une variable à l'exterieur d'une fonction alors qu'on est dedans la fonction (et inversemment). Il faut donc les envoyer à travers les paramètres d'une fonction pour avoir leur valeur. Toutes les variables en dehors des fonctions sont accessibles directement par toutes les pages en étant à l'extérieur des fonctions.
+
+Attention cependant à l'ordre dans lequel sont liés les pages et à l'initialisation des variables. Même chose pour les fonctions.
 
 #### Buffer (mémoire tampon)
 Utilité:
